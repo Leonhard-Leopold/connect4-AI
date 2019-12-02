@@ -1,7 +1,5 @@
 # connect4-AI
-Connect 4 AI with MCTS and a Neural Network
-
-A Connect-4 AI implemented in Python.
+Connect-4 AI implemented in Python.
 
 The AI chooses moves with the help of a Monte Carlo Search Tree which gets predictions from a neural network.
 The Code is documented throughout.
