@@ -29,4 +29,4 @@ The Code is documented throughout
 
 
 
-*Structure for Neural Network inspired by: https://github.com/AppliedDataSciencePartners*
+*Structure of Neural Network inspired by: https://github.com/AppliedDataSciencePartners*
