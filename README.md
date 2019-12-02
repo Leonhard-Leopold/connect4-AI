@@ -5,7 +5,9 @@ A Connect-4 AI implemented in Python.
 
 The AI chooses moves with the help of a Monte Carlo Search Tree which gets predictions from a neural network.
 The Code is documented throughout.
-Inside the "run 1" folder is pre-trained version that was trained for 1 hour (plays at a competent but not perfect level)
+
+
+Inside the "run 1" folder is a pre-trained version that was trained for 1 hour (plays at a competent but not perfect level)
 
 	Options:  
         playing human vs human 
