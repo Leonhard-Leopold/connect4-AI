@@ -1,11 +1,12 @@
 import numpy as np
 import random
 from collections import deque
+import HumanPlayer
+import AIPlayer
 try:
     from .util import check_for_winner, display_game_state, calculate_id, valid_actions
-except (ModuleNotFoundError, ImportError):
+except (ModuleNotFoundError, ImportError) as e:
     from util import check_for_winner, display_game_state, calculate_id, valid_actions
-
 
 class Game:
     def __init__(self, player1, player2):
@@ -35,6 +36,9 @@ class Game:
             turn_counter += 1
             # det = deterministic (whether the AI always chooses the best move)
             det = turn_counter >= det_
+
+            if isinstance(players[self.game_state.active_player], AIPlayer.AIPlayer) and isinstance(players[-self.game_state.active_player], HumanPlayer.HumanPlayer):
+                print("AI is choosing a move ...")
 
             # get the move from the current player (AI or Human)
             action, action_values = players[self.game_state.active_player].get_move(self.game_state, det, sims)
