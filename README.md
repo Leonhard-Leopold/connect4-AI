@@ -19,9 +19,8 @@ The Code is documented throughout
         connect4.py -x h -o h (human vs human)
 
 	Command Line Arguments:
-        -x (choosing the type of player 1)
-        -o (choosing the type of player 2) 
-          a = ai; h = human
+        -x (choosing the type of player 1; a = AI; h = human)
+        -o (choosing the type of player 2; a = AI; h = human) 
         --run (choosing the run folder)
         --ver (choosing the version of a trained neural network model)
         --mem (loading saved action values - not particularly necessary; if memory is not loaded action values are created in training)
