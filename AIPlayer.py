@@ -65,7 +65,6 @@ class AIPlayer:
         for action, edge in self.mcts.root.edges:
             q[action] = edge.Q
             n[action] = edge.N
-        # TODO mit .N austauschen wenn es nicht funktioniert
         n = n / (np.sum(n) * 1.0)
         # the values are normalized into a scale of 0 to 1
         allowed_actions = valid_actions(game_state.array)
@@ -88,9 +87,6 @@ class AIPlayer:
         except (ValueError, IndexError):
             # if the error occurs, simply a random allowed move is chose instead
             action = random.choice(allowed_actions)
-        # TODO entfernen wenn alles geht
-        #  next_game_state = game_state.take_action(action)
-        #  next_game_state_value = -self.get_predictions(next_game_state)[0]
         return action, n
 
     # uses the neural network to get the value of the game state and the quality of the available moves

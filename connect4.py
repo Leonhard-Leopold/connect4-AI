@@ -187,7 +187,4 @@ def connect4():
             connect4()
 
 
-# possible usage:
-# py connect4.py -x a -o a --run 2 --ver 420 --mem 420
-# py connect4.py -x a -o a --run 1 --mem 9 --ver 9
 connect4()
