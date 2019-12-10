@@ -26,7 +26,7 @@ The AI chooses a move after a running a certain amount of simulations in the Mon
         -o (choosing the type of player 2; a = AI; h = human) 
         --run (choosing the run folder)
         --ver (choosing the version of a trained neural network model)
-        --mem (loading saved action values - shortens training, but is not particularly necessary; if the memory is not loaded, 		action values will be created in training)
+        --mem (loading saved action values - shortens training, but is not particularly necessary; if the memory is not loaded, action values will be created in training)
         
 
 
