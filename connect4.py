@@ -19,7 +19,7 @@ import sys
 from collections import deque
 import pickle
 warnings.resetwarnings()
-memory = deque(maxlen=50000)
+memory = deque(maxlen=10000)
 
 
 # if wanted, the weights of a previous model can be loaded.
@@ -123,7 +123,7 @@ def connect4():
                 memory = pickle.load(f)
                 print("Using memory version " + str(args['mem']) + " of run " + str(args['run']))
     except (KeyError, FileNotFoundError):
-        memory = deque(maxlen=50000)
+        memory = deque(maxlen=10000)
         print("memory not loaded")
 
     # if both players are AIPlayers, games will be simulated until the program is stopped
@@ -143,12 +143,18 @@ def connect4():
             print(str(session) + ": Player 1 won " + str(stats[1]) + " times, Player 2 won " + str(
                 stats[-1]) + " times, there was a draw " + str(stats[0]) + " times")
             # if enough data is collected the data is replayed to the model of player2 in order to improve it
+            # this value can be changed arbitrarily, because only 256 values are used at a time.
+            # the higher the value the higher the variety of data used to improve the neural network
             if len(memory) >= 10000:
                 print("Retraining player2 from memory")
                 player2.replay(memory)
                 # the loss is saved to a file
-                with open("run1/loss_history.p", "wb") as f:
-                    pickle.dump(player2.loss_array, f)
+                try:
+                    with open("run" + str(args['run']) + "/loss_history.p", "wb") as f:
+                        pickle.dump(player2.loss_array, f)
+                except (KeyError, FileNotFoundError):
+                    with open("run1/loss_history.p", "wb") as f:
+                        pickle.dump(player2.loss_array, f)
 
                 # the two version are compared to each other by playing a certain amount of games
                 print("Comparing retrained version...")
@@ -162,11 +168,11 @@ def connect4():
                     weights = player2.model.model.get_weights()
                     player1.model.model.set_weights(weights)
                     nn_version += 1
-                    player1.model.write(nn_version)
+                    player1.model.write(args, nn_version)
                     try:
-                        with open("Bachelorarbeit/run1/memory/memory" + str(nn_version) + ".p", "wb") as f:
+                        with open("run"+str(args['run'])+"/memory/memory" + str(nn_version) + ".p", "wb") as f:
                             pickle.dump(memory, f)
-                    except FileNotFoundError:
+                    except (KeyError, FileNotFoundError):
                         with open("run1/memory/memory" + str(nn_version) + ".p", "wb") as f:
                             pickle.dump(memory, f)
             else:
@@ -175,7 +181,7 @@ def connect4():
     else:
         game = Game(player1, player2)
         start_time = time.time()
-        game.play(det_=0, collect=False, sims=1000)
+        game.play(det_=0, collect=False, sims=250)
         end_time = time.time()
         time_in_sec = end_time - start_time
         formated_time = str(datetime.timedelta(seconds=time_in_sec))

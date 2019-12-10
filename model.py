@@ -120,23 +120,19 @@ class NeuralNetwork:
         return self.model.fit(states, targets, epochs=epochs, verbose=1, validation_split=0.1)
 
     # saves a model version to memory
-    def write(self, version):
+    def write(self, args, version):
         try:
-            self.model.save("Bachelorarbeit/run1/models/version"+str(version)+".h5")
-            print("model writen Bachelorarbeit/run1/models/version"+str(version)+".h5")
-        except (FileNotFoundError, OSError):
+            self.model.save("run"+str(args['run'])+"/models/version"+str(version)+".h5")
+            print("model written to run"+str(args['run'])+"/models/version"+str(version)+".h5")
+        except (FileNotFoundError, OSError, KeyError):
             self.model.save("run1/models/version"+str(version)+".h5")
-            print("model writen run1/models/version"+str(version)+".h5")
+            print("model written run1/models/version"+str(version)+".h5")
 
     # reads a model from memory and initializes it
     def read(self, run, version):
         try:
-            try:
-                return load_model('Bachelorarbeit/run' + str(run) + "/models/version" + str(version) + '.h5',
-                custom_objects={'softmax_cross_entropy_with_logits': softmax_cross_entropy_with_logits})
-            except FileNotFoundError:
-                return load_model('run' + str(run) + "/models/version" + str(version) + '.h5',
-                custom_objects={'softmax_cross_entropy_with_logits': softmax_cross_entropy_with_logits})
+            return load_model('run' + str(run) + "/models/version" + str(version) + '.h5',
+            custom_objects={'softmax_cross_entropy_with_logits': softmax_cross_entropy_with_logits})
         except (FileNotFoundError, OSError):
             return NeuralNetwork().model
 
