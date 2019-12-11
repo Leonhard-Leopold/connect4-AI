@@ -85,7 +85,7 @@ class AIPlayer:
                 action_idx = np.random.multinomial(1, normalized)
                 action = np.where(action_idx == 1)[0][0]
         except (ValueError, IndexError):
-            # if the error occurs, simply a random allowed move is chose instead
+            # if the error occurs, simply a random allowed move is chosen instead
             action = random.choice(allowed_actions)
         return action, n
 
@@ -96,7 +96,7 @@ class AIPlayer:
         preds = self.model.predict(input_to_model)
         # output 1: estimated value of the board position
         value = preds[0][0]
-        # output 2: logits (unnormalized predictions) of the best move to chose
+        # output 2: logits (unnormalized predictions) of the best move to choose
         logits = preds[1][0]
 
         # filter out the relevant moves
