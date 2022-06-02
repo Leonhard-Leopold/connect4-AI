@@ -15,7 +15,7 @@ google-pasta==0.1.7
 graphviz==0.8.2
 grpcio==1.25.0
 h5py==2.7.1
-html5lib==0.9999999
+html5lib==0.99999999
 idna==2.8
 ipykernel==4.8.2
 ipython==6.2.1
